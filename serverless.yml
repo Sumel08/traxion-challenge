@@ -23,7 +23,7 @@ provider:
 
 functions:
   createShortcode:
-    handler: src.functions.create-shortcode.handler.create_shortcode
+    handler: src.functions.create_shortcode.handler.create_shortcode
     events:
       - http:
           method: POST
@@ -31,10 +31,10 @@ functions:
           private: true
           request:
             schemas:
-              application/json: ${file(./src/functions/create-shortcode/schema.json)}
+              application/json: ${file(./src/functions/create_shortcode/schema.json)}
 
   resolveShortcode:
-    handler: src.functions.resolve-shortcode.handler.resolve_shortcode
+    handler: src.functions.resolve_shortcode.handler.resolve_shortcode
     events:
       - http:
           method: GET
