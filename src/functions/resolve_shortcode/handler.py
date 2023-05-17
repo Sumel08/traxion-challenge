@@ -1,15 +1,18 @@
 import json
 
+from src.services.resolve_shortcode import ResolveShortcodeService
+
 
 def resolve_shortcode(event, context):
-    body = {
-        "message": "Go Serverless v1.0! Your function executed successfully!",
-        "input": event
-    }
+    params = event.get('pathParameters')
+    service = ResolveShortcodeService()
 
-    response = {
-        "statusCode": 200,
-        "body": json.dumps(body)
-    }
+    response = service.handle_request(**params)
 
-    return response
+    return {
+        "statusCode": response.code,
+        "body": json.dumps({"data": response.data, "message": response.message}),
+        "headers": {
+            "Location": response.data.get('url'),
+        },
+    }
