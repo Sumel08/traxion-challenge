@@ -2,12 +2,12 @@
   "$schema": "http://json-schema.org/draft-04/schema#",
   "type": "object",
   "title": "Create a url shortcode",
-  "required": ["url", "name"],
+  "required": ["url", "title"],
   "properties": {
     "url": {
       "type": "string"
     },
-    "name": {
+    "title": {
       "type": "string"
     }
   }
