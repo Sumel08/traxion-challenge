@@ -15,7 +15,6 @@ provider:
   iamRoleStatements:
     - Effect: Allow
       Action:
-        - dynamodb:Query
         - dynamodb:GetItem
         - dynamodb:PutItem
       Resource:
@@ -38,8 +37,8 @@ functions:
     events:
       - http:
           method: GET
-          path: /{shortcode}
-          private: true
+          path: /{code}
+          private: false
 
 resources:
   Resources:

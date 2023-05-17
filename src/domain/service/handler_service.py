@@ -10,7 +10,7 @@ class ServiceResponse:
         self.code = code
 
 
-class ServiceHandler:
+class ServiceHandler(metaclass=SingletonMeta):
 
     @abstractmethod
     def handle_request(self, *args, **kwargs) -> ServiceResponse:

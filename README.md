@@ -90,22 +90,11 @@ Create a URL Shortener service
 <tbody>
 <tr>
 <td>Path</td>
-<td>/{shortcode}</td>
+<td>/{code}</td>
 </tr>
 <tr>
 <td>Method</td>
 <td>GET</td>
-</tr>
-<tr>
-<td>Preconditions</td>
-<td>Have an api Key</td>
-</tr>
-<tr>
-<td colspan="2">Headers</td>
-</tr>
-<tr>
-<td>x-api-key</td>
-<td>{{apiKey}}</td>
 </tr>
 <tr><td colspan="2"></td></tr>
 <tr>
