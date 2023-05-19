@@ -3,12 +3,31 @@
 Author: Oscar Lemus
 
 ## Challenge
+
 Create a URL Shortener service
+
+## Instructions
+
+This project was created with serverless framework, and it is ready to be
+deployed, if you want to run this locally, you need to follow the next steps
+
+* Create a new environment and install the required packages
+* Run ```sls offline``` command in order to raise a new server in offline mode
+* An api key will be given in prompt in order to test locally
+* The default url is ```http://localhost:3000```
+* Note: in order to be functional, first you need to deploy the project in your AWS account in order to create the
+  infrastructure DynamoDB and you need to configure your default profile credentials, or you can put your credentials
+  in ```src/dao/shortcode.py``` file, on ```boto3.client('dynamodb')``` method
+  as ```boto3.client('dynamodb', aws_access_key_id={your key}, aws_secret_access_key={your secret key})```
+
+### Deploy
+
+In order to deploy the service you just need to configure in serverless.yml your aws account profile and
+run ```sls deploy```
 
 ## API Contract
 
 ### Create a new shortcode
-
 
 <table>
 <thead>
@@ -52,6 +71,7 @@ Create a URL Shortener service
   "name": "Personal Web"
 }
 ```
+
 </td>
 </tr>
 <tr><td colspan="2"></td></tr>
@@ -68,6 +88,7 @@ Create a URL Shortener service
   "url": "https://some-domain.com/tx3Df"
 }
 ```
+
 </td>
 </tr>
 <tr><td>400</td><td>Bad Request</td></tr>
@@ -76,9 +97,7 @@ Create a URL Shortener service
 </tbody>
 </table>
 
-
 ### Create a new shortcode
-
 
 <table>
 <thead>
@@ -115,6 +134,7 @@ Redirect to original URL
 </table>
 
 ## Tasks to follow
+
 | TXC-1 | Define Infrastructure in serverless framework |
 |-------|-----------------------------------------------|
 | TXC-2 | Create code structure                         |

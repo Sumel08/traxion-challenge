@@ -16,7 +16,7 @@ def resolve_shortcode(event, context):
 
     response = service.handle_request(**params)
 
-    if response.code is not 302:
+    if response.code != 302:
         return {
             "statusCode": response.code,
             "body": json.dumps({"data": response.data, "message": response.message})
