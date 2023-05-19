@@ -58,7 +58,7 @@ resources:
 
 custom:
   dev:
-    SHORT_URL: 'http://localhost:3000/{}'
+    SHORT_URL: 'https://2mtblafnd8.execute-api.us-east-1.amazonaws.com/dev/{}'
 
 plugins:
   - serverless-python-requirements
