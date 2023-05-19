@@ -25,6 +25,20 @@ deployed, if you want to run this locally, you need to follow the next steps
 In order to deploy the service you just need to configure in serverless.yml your aws account profile and
 run ```sls deploy```
 
+## Tests
+
+In order to run the tests run the followring command
+
+```python -m unittest discover -v```
+
+Generate Coverage test
+
+```python -m coverage run -m unittest discover -v```
+
+Get Coverage Report
+
+```python -m coverage report```
+
 ## API Contract
 
 ### Create a new shortcode
