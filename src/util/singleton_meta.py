@@ -1,3 +1,7 @@
+"""
+This singleton meta class was obtained from refactoring guru
+"""
+
 
 class SingletonMeta(type):
     """

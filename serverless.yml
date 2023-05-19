@@ -12,6 +12,7 @@ provider:
       - name: ${self:service}_${self:provider.stage}
   environment:
     SHORTENER_TABLE_NAME: ${self:service}_SHORTENER_${self:provider.stage}
+    SHORT_URL: ${self:custom.${self:provider.stage}.SHORT_URL}
   iamRoleStatements:
     - Effect: Allow
       Action:
@@ -54,6 +55,10 @@ resources:
             KeyType: HASH
         BillingMode: PAY_PER_REQUEST
         TableName: ${self:provider.environment.SHORTENER_TABLE_NAME}
+
+custom:
+  dev:
+    SHORT_URL: 'http://localhost:3000/{}'
 
 plugins:
   - serverless-python-requirements

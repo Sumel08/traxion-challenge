@@ -1,32 +1,42 @@
 import os
 from typing import Optional
 
+from src.converter.shortcode import ShortcodeConverter
 from src.domain.dao.shortcode import ShortcodeDaoInterface
 from src.domain.dto.shortcode import ShortcodeDto
 import boto3
 
+from src.domain.entities.shortcode import ShortcodeEntity
+
 
 class ShortcodeDao(ShortcodeDaoInterface):
-    TABLE_NAME = os.environ['SHORTENER_TABLE_NAME']
+    """
+    Implementation of the dao definition for Shortcode Model
+    """
+    TABLE_NAME = os.environ.get('SHORTENER_TABLE_NAME', None)
 
     def __init__(self):
-        self.dynamoClient = boto3.client('dynamodb')
+        self.shortcode_converter = ShortcodeConverter()
+        self.dynamo_client = boto3.client('dynamodb')
 
     def create(self, shortcode: ShortcodeDto) -> ShortcodeDto:
-        self.dynamoClient.put_item(
+        entity = self.shortcode_converter.from_dto(shortcode)
+        self.dynamo_client.put_item(
             TableName=self.TABLE_NAME,
-            Item={"code": {'S': shortcode.code}, "url": {'S': shortcode.url}, "title": {'S': shortcode.title}}
+            Item={"code": {'S': entity.code}, "url": {'S': entity.url}, "title": {'S': entity.title}},
         )
-        return shortcode
+        return self.shortcode_converter.from_entity(entity)
 
     def retrieve(self, code: str) -> Optional[ShortcodeDto]:
-        resp = self.dynamoClient.get_item(
+        resp = self.dynamo_client.get_item(
             TableName=self.TABLE_NAME,
             Key={
                 'code': {'S': code}
             }
         )
-        if not resp.get('Item'):
+        if resp.get('Item', None) is None:
             return None
         item = resp.get('Item')
-        return ShortcodeDto(item.get('code').get('S'), item.get('url').get('S'), item.get('title').get('S'))
+        shortcode_entity = ShortcodeEntity(item.get('code').get('S'), item.get('url').get('S'),
+                                           item.get('title').get('S'))
+        return self.shortcode_converter.from_entity(shortcode_entity)
