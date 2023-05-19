@@ -18,3 +18,9 @@ var/
 
 # Serverless directories
 .serverless
+
+.idea
+
+venv/
+
+node_modules/
